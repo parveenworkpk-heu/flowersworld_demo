@@ -1,0 +1,8 @@
+{
+  "build": {
+    "builder": "Node.js"
+  },
+  "buildCommand": "npm run build",
+  "outputDirectory": "build",
+  "framework": "create-react-app"
+}
