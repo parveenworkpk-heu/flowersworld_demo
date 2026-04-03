@@ -1,4 +1,7 @@
 {
   "buildCommand": "CI=false npx react-scripts build",
-  "outputDirectory": "build"
+  "outputDirectory": "build",
+  "env": {
+    "REACT_APP_API_URL": "https://flowersworld-backend.onrender.com/api"
+  }
 }
