@@ -1,8 +1,5 @@
 {
-  "buildCommand": "cd client && npm install && npm run build",
-  "outputDirectory": "client/build",
-  "framework": "create-react-app",
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/client/build/index.html" }
-  ]
+  "buildCommand": "npm install && npm run build",
+  "outputDirectory": "build",
+  "framework": "create-react-app"
 }
