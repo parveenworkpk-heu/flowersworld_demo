@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, QuestionCircle } from 'lucide-react';
+import { ChevronDown, HelpCircle } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 
 const FAQItem = ({ question, answer, isOpen, onToggle }) => (
@@ -90,7 +90,7 @@ const FAQs = () => {
             animate={{ opacity: 1, y: 0 }}
             className="flex items-center justify-center gap-3 mb-4"
           >
-            <QuestionCircle size={40} className="text-primary" />
+            <HelpCircle size={40} className="text-primary" />
             <h1 className="font-heading text-4xl font-bold">
               Frequently Asked <span className="text-primary">Questions</span>
             </h1>
