@@ -8,7 +8,7 @@ import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { formatINR, validateEmail, validatePhone } from '../utils/helpers';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+import API_URL from '../config';
 
 const Checkout = () => {
   const { cartItems, cartTotal, clearCart } = useCart();
@@ -32,6 +32,8 @@ const Checkout = () => {
   
   const [paymentMethod, setPaymentMethod] = useState('COD');
   const [errors, setErrors] = useState({});
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState('');
 
   useEffect(() => {
     if (user) {
@@ -164,6 +166,25 @@ const Checkout = () => {
         <title>Checkout - Flowers World</title>
       </Helmet>
 
+      {showPopup && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-xl p-6 max-w-md mx-4 shadow-xl">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-3xl">⚠️</span>
+              </div>
+              <p className="text-gray-700 text-lg">{popupMessage}</p>
+              <button 
+                onClick={() => setShowPopup(false)}
+                className="mt-4 btn-primary"
+              >
+                OK
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <section className="bg-light py-8">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-center gap-4">
@@ -278,7 +299,20 @@ const Checkout = () => {
                       </div>
                     </div>
                     <div className="mt-6 flex justify-end">
-                      <button onClick={() => setStep(2)} className="btn-primary flex items-center gap-2">
+                      <button 
+                        onClick={() => {
+                          const validationErrors = validateShipping();
+                          if (Object.keys(validationErrors).length > 0) {
+                            setErrors(validationErrors);
+                            setPopupMessage('Please fill all the required details before proceeding to payment.');
+                            setShowPopup(true);
+                            setTimeout(() => setShowPopup(false), 3000);
+                          } else {
+                            setStep(2);
+                          }
+                        }} 
+                        className="btn-primary flex items-center gap-2"
+                      >
                         Continue to Payment <ChevronRight size={20} />
                       </button>
                     </div>
@@ -312,31 +346,7 @@ const Checkout = () => {
                           <p className="text-sm text-gray-500">Pay when you receive your order</p>
                         </div>
                       </label>
-                      <label className={`flex items-center gap-4 p-4 border rounded-xl cursor-pointer transition-colors ${
-                        paymentMethod === 'UPI' ? 'border-primary bg-primary/5' : 'hover:border-gray-300'
-                      }`}>
-                        <input
-                          type="radio"
-                          name="payment"
-                          value="UPI"
-                          checked={paymentMethod === 'UPI'}
-                          onChange={() => setPaymentMethod('UPI')}
-                          className="w-4 h-4 text-primary"
-                        />
-                        <CreditCard size={24} />
-                        <div>
-                          <p className="font-medium">UPI Payment</p>
-                          <p className="text-sm text-gray-500">Pay using UPI app</p>
-                        </div>
-                      </label>
                     </div>
-
-                    {paymentMethod === 'UPI' && (
-                      <div className="mt-6 p-4 bg-gray-50 rounded-xl">
-                        <p className="text-sm text-gray-600 mb-2">UPI ID: flowersworld@upi</p>
-                        <p className="text-xs text-gray-500">Scan QR or enter UPI ID to complete payment</p>
-                      </div>
-                    )}
 
                     <div className="mt-6 flex justify-between">
                       <button onClick={() => setStep(1)} className="btn-secondary flex items-center gap-2">

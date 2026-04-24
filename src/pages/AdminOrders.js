@@ -5,7 +5,7 @@ import { Eye, ChevronLeft, ChevronRight, Download } from 'lucide-react';
 import axios from 'axios';
 import { formatINR, formatDate, getStatusColor } from '../utils/helpers';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+import API_URL from '../config';
 
 const AdminOrders = () => {
   const [orders, setOrders] = useState([]);

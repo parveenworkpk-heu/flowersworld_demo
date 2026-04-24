@@ -151,7 +151,7 @@ const About = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/shop" className="btn-primary">Shop Now</Link>
-              <Link to="/contact" className="btn-secondary bg-transparent border-white hover:bg-white/10">Contact Us</Link>
+              <Link to="/contact" className="btn-primary">Contact Us</Link>
             </div>
           </motion.div>
         </div>

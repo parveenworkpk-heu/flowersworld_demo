@@ -7,7 +7,7 @@ import axios from 'axios';
 import ProductCard from '../components/ProductCard';
 import { formatINR } from '../utils/helpers';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+import API_URL from '../config';
 
 const heroImages = [
   'https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=1920&q=80',

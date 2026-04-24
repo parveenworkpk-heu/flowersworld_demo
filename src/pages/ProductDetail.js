@@ -8,7 +8,7 @@ import { useCart } from '../context/CartContext';
 import { formatINR } from '../utils/helpers';
 import ProductCard from '../components/ProductCard';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+import API_URL from '../config';
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -186,7 +186,18 @@ const ProductDetail = () => {
                   <ShoppingBag size={20} /> Add to Cart
                 </button>
                 <button
-                  onClick={() => setWishlist(!wishlist)}
+                  onClick={async () => {
+                    if (!user) {
+                      alert('Please login to add to wishlist');
+                      return;
+                    }
+                    setWishlist(!wishlist);
+                    if (!wishlist) {
+                      alert('Added to wishlist!');
+                    } else {
+                      alert('Removed from wishlist');
+                    }
+                  }}
                   className={`p-3 border-2 rounded-lg transition-colors ${
                     wishlist ? 'border-red-500 bg-red-50 text-red-500' : 'border-gray-300 hover:border-red-500'
                   }`}

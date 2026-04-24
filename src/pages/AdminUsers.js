@@ -5,7 +5,7 @@ import { Search, UserX, UserCheck, ChevronLeft, ChevronRight, Mail } from 'lucid
 import axios from 'axios';
 import { formatDate } from '../utils/helpers';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+import API_URL from '../config';
 
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);

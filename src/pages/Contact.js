@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Send, MessageSquare } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import axios from 'axios';
+import { useAuth } from '../context/AuthContext';
 import { validateEmail, validatePhone } from '../utils/helpers';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+import API_URL from '../config';
 
 const Contact = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -33,6 +36,13 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!user) {
+      alert('Please login to contact us');
+      navigate('/login');
+      return;
+    }
+    
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
@@ -41,12 +51,15 @@ const Contact = () => {
 
     setLoading(true);
     try {
+      const token = localStorage.getItem('token');
       await axios.post(`${API_URL}/products`, { 
         name: 'Contact Form', 
         description: `Name: ${formData.name}, Email: ${formData.email}, Phone: ${formData.phone}, Message: ${formData.message}`,
         price: 0,
         category: 'Contact',
         stock: 0
+      }, {
+        headers: token ? { Authorization: `Bearer ${token}` } : {}
       });
       setSuccess(true);
       setFormData({ name: '', email: '', phone: '', message: '' });

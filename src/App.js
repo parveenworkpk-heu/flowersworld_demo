@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import Shop from './pages/Shop';
 import ProductDetail from './pages/ProductDetail';
 import About from './pages/About';
+import FAQs from './pages/FAQs';
 import Contact from './pages/Contact';
 import Checkout from './pages/Checkout';
 import Account from './pages/Account';
@@ -39,6 +40,7 @@ function App() {
                   <Route path="/shop" element={<Shop />} />
                   <Route path="/product/:id" element={<ProductDetail />} />
                   <Route path="/about" element={<About />} />
+                  <Route path="/faqs" element={<FAQs />} />
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/register" element={<Register />} />

@@ -7,7 +7,7 @@ import axios from 'axios';
 import ProductCard from '../components/ProductCard';
 import { formatINR } from '../utils/helpers';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+import API_URL from '../config';
 
 const categories = ['All', 'Roses', 'Lilies', 'Tulips', 'Orchids', 'Sunflowers', 'Mixed', 'Bouquets', 'Gift Sets'];
 const sortOptions = [
@@ -26,6 +26,8 @@ const Shop = () => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [categoriesOpen, setCategoriesOpen] = useState(false);
+  const [sortOpen, setSortOpen] = useState(false);
 
   useEffect(() => {
     fetchProducts();
@@ -91,22 +93,30 @@ const Shop = () => {
             <aside className="lg:w-64 flex-shrink-0">
               <div className="lg:sticky lg:top-24 space-y-6">
                 <div className="bg-white rounded-xl p-5 shadow-sm">
-                  <h3 className="font-heading font-semibold mb-4">Categories</h3>
-                  <div className="space-y-2">
-                    {categories.map((cat) => (
-                      <button
-                        key={cat}
-                        onClick={() => { setCategory(cat); setCurrentPage(1); }}
-                        className={`block w-full text-left px-3 py-2 rounded-lg transition-colors ${
-                          category === cat
-                            ? 'bg-primary text-white'
-                            : 'hover:bg-gray-50'
-                        }`}
-                      >
-                        {cat}
-                      </button>
-                    ))}
-                  </div>
+                  <button 
+                    onClick={() => setCategoriesOpen(!categoriesOpen)}
+                    className="w-full flex items-center justify-between font-heading font-semibold mb-4"
+                  >
+                    <span>Categories</span>
+                    <ChevronDown className={`transition-transform ${categoriesOpen ? 'rotate-180' : ''}`} size={20} />
+                  </button>
+                  {categoriesOpen && (
+                    <div className="space-y-2">
+                      {categories.map((cat) => (
+                        <button
+                          key={cat}
+                          onClick={() => { setCategory(cat); setCurrentPage(1); setCategoriesOpen(false); }}
+                          className={`block w-full text-left px-3 py-2 rounded-lg transition-colors ${
+                            category === cat
+                              ? 'bg-primary text-white'
+                              : 'hover:bg-gray-50'
+                          }`}
+                        >
+                          {cat}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 <div className="bg-white rounded-xl p-5 shadow-sm">

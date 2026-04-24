@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Save, Lock } from 'lucide-react';
+import { Save } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { validateEmail, validatePhone } from '../utils/helpers';
 
@@ -12,11 +12,6 @@ const AccountDetails = () => {
     name: user?.name || '',
     email: user?.email || '',
     phone: user?.phone || ''
-  });
-  const [passwordData, setPasswordData] = useState({
-    currentPassword: '',
-    newPassword: '',
-    confirmPassword: ''
   });
   const [errors, setErrors] = useState({});
 
@@ -113,47 +108,6 @@ const AccountDetails = () => {
           </motion.p>
         )}
       </form>
-
-      <div className="mt-8 pt-8 border-t">
-        <h3 className="font-heading text-lg font-semibold mb-4 flex items-center gap-2">
-          <Lock size={20} /> Change Password
-        </h3>
-        <form className="space-y-4 max-w-md">
-          <div>
-            <label className="block text-sm font-medium mb-1">Current Password</label>
-            <input
-              type="password"
-              name="currentPassword"
-              value={passwordData.currentPassword}
-              onChange={handlePasswordChange}
-              className="input-field"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">New Password</label>
-            <input
-              type="password"
-              name="newPassword"
-              value={passwordData.newPassword}
-              onChange={handlePasswordChange}
-              className="input-field"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Confirm New Password</label>
-            <input
-              type="password"
-              name="confirmPassword"
-              value={passwordData.confirmPassword}
-              onChange={handlePasswordChange}
-              className="input-field"
-            />
-          </div>
-          <button type="button" className="btn-secondary">
-            Update Password
-          </button>
-        </form>
-      </div>
     </div>
   );
 };
