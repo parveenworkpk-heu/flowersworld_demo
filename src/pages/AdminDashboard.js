@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { LayoutDashboard, Package, Users, ShoppingBag, TrendingUp, DollarSign, UserCheck, Clock, LogOut } from 'lucide-react';
+import { LayoutDashboard, Package, Users, ShoppingBag, TrendingUp, DollarSign, UserCheck, Clock, LogOut, MessageSquare } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import axios from 'axios';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, BarChart, Bar } from 'recharts';
@@ -35,7 +35,8 @@ const AdminDashboard = () => {
     { path: '/admin', icon: LayoutDashboard, label: 'Dashboard' },
     { path: '/admin/orders', icon: ShoppingBag, label: 'Orders' },
     { path: '/admin/products', icon: Package, label: 'Products' },
-    { path: '/admin/users', icon: Users, label: 'Users' }
+    { path: '/admin/users', icon: Users, label: 'Users' },
+    { path: '/admin/contact', icon: MessageSquare, label: 'Contact Submissions' }
   ];
 
   const handleLogout = () => {

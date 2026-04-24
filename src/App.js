@@ -23,6 +23,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import AdminOrders from './pages/AdminOrders';
 import AdminProducts from './pages/AdminProducts';
 import AdminUsers from './pages/AdminUsers';
+import AdminContactSubmissions from './pages/AdminContactSubmissions';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminRoute from './components/AdminRoute';
 
@@ -77,6 +78,11 @@ function App() {
                   <Route path="/admin/users" element={
                     <AdminRoute>
                       <AdminUsers />
+                    </AdminRoute>
+                  } />
+                  <Route path="/admin/contact" element={
+                    <AdminRoute>
+                      <AdminContactSubmissions />
                     </AdminRoute>
                   } />
                 </Routes>

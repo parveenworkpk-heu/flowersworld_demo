@@ -51,15 +51,12 @@ const Contact = () => {
 
     setLoading(true);
     try {
-      const token = localStorage.getItem('token');
-      await axios.post(`${API_URL}/products`, { 
-        name: 'Contact Form', 
-        description: `Name: ${formData.name}, Email: ${formData.email}, Phone: ${formData.phone}, Message: ${formData.message}`,
-        price: 0,
-        category: 'Contact',
-        stock: 0
-      }, {
-        headers: token ? { Authorization: `Bearer ${token}` } : {}
+      await axios.post(`${API_URL}/contact`, { 
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        message: formData.message,
+        userId: user?._id
       });
       setSuccess(true);
       setFormData({ name: '', email: '', phone: '', message: '' });
