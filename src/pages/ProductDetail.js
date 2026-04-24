@@ -14,7 +14,7 @@ import API_URL from '../config';
 const ProductDetail = () => {
   const { id } = useParams();
   const { user } = useAuth();
-  const { addToCart } = useCart();
+  const { addToCart, loading: cartLoading } = useCart();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState(0);
@@ -22,8 +22,6 @@ const ProductDetail = () => {
   const [activeTab, setActiveTab] = useState('description');
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [wishlist, setWishlist] = useState(false);
-  
-  const { addToCart, loading: cartLoading } = useCart();
 
   useEffect(() => {
     fetchProduct();
