@@ -19,10 +19,6 @@ const AccountDetails = () => {
     setProfileData({ ...profileData, [e.target.name]: e.target.value });
   };
 
-  const handlePasswordChange = (e) => {
-    setPasswordData({ ...passwordData, [e.target.name]: e.target.value });
-  };
-
   const handleProfileSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};

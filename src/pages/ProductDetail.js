@@ -5,6 +5,7 @@ import { Heart, ShoppingBag, Minus, Plus, Star, Truck, Shield, RefreshCw, Chevro
 import { Helmet } from 'react-helmet-async';
 import axios from 'axios';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 import { formatINR } from '../utils/helpers';
 import ProductCard from '../components/ProductCard';
 
@@ -12,6 +13,8 @@ import API_URL from '../config';
 
 const ProductDetail = () => {
   const { id } = useParams();
+  const { user } = useAuth();
+  const { addToCart } = useCart();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState(0);
